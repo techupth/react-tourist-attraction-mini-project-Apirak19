@@ -50,12 +50,15 @@ const Homepage = () => {
       />
       {data.map((item) => {
         return (
-          <div key={item.eid} className="flex w-[1024px] gap-[30px] my-[20px]">
-            <div className="max-w-[400px] max-h-[200px] ">
+          <div
+            key={item.eid}
+            className="flex w-[1024px] gap-[30px] my-[20px] relative"
+          >
+            <div className="max-w-[400px] max-h-[250px] ">
               <img
                 src={item.photos[0]}
                 alt={item.title}
-                className="max-h-[200px] rounded-3xl"
+                className="h-[250px] rounded-3xl"
                 width={300}
               />
             </div>
@@ -77,6 +80,20 @@ const Homepage = () => {
                   </span>
                 ))}
               </p>
+              <div className="flex gap-[20px] mt-[5px]">
+                {item.photos.slice(1).map((img) => {
+                  return <img src={img} className="w-[100px] h-[100px] rounded-xl" />;
+                })}
+              </div>
+            </div>
+            <div
+              className="absolute bottom-0 right-0 w-[75px] h-[75px] bg-blue-400 rounded-full text-sm flex items-center justify-center text-white font-bold cursor-pointer"
+              onClick={() => {
+                alert("copied");
+                navigator.clipboard.writeText(item.url);
+              }}
+            >
+              copy URL
             </div>
           </div>
         );
