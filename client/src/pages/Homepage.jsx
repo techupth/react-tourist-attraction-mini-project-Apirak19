@@ -65,14 +65,29 @@ const Homepage = () => {
             <div className="max-w-[624px] flex flex-col gap-[5px] ">
               <h4 className="font-bold text-lg">{item.title}</h4>
               <p className="truncate">{item.description}</p>
-              <a href={item.url} target="_blank">
+              <a
+                href={item.url}
+                target="_blank"
+                className="w-[100px] underline text-blue-500 font-bold"
+              >
                 อ่านต่อ
               </a>
               <p>
                 หมวด:
-                {item.tags.map((tag) => (
+                {item.tags.slice(0, -1).map((tag) => (
                   <span
-                    className="mx-[5px]"
+                    className={`mx-[5px] underline
+                    } `}
+                    onClick={() => handleTag(tag)}
+                    key={tag}
+                  >
+                    {tag}
+                  </span>
+                ))}{" "}
+                และ
+                {item.tags.slice(-1).map((tag) => (
+                  <span
+                    className="mx-[5px] underline"
                     onClick={() => handleTag(tag)}
                     key={tag}
                   >
@@ -82,7 +97,13 @@ const Homepage = () => {
               </p>
               <div className="flex gap-[20px] mt-[5px]">
                 {item.photos.slice(1).map((img) => {
-                  return <img src={img} className="w-[100px] h-[100px] rounded-xl" />;
+                  return (
+                    <img
+                      src={img}
+                      className="w-[100px] h-[100px] rounded-xl"
+                      key={img}
+                    />
+                  );
                 })}
               </div>
             </div>
