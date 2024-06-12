@@ -9,10 +9,12 @@ const Homepage = () => {
   const [tag, setTag] = useState([]);
 
   const handleTag = (newTag) => {
-    setTag((prevTag) => [...prevTag, newTag]);
-    setKeyword((prevKeyword) =>
-      prevKeyword ? `${prevKeyword} ${newTag}` : newTag
-    );
+    if (!tag.includes(newTag)) {
+      setTag((prevTag) => [...prevTag, newTag]);
+      setKeyword((prevKeyword) =>
+        prevKeyword ? `${prevKeyword} ${newTag}` : newTag
+      );
+    }
   };
 
   const handleInput = (input) => {
@@ -52,7 +54,7 @@ const Homepage = () => {
         return (
           <div
             key={item.eid}
-            className="flex w-[1024px] gap-[30px] my-[20px] relative"
+            className="flex w-[1024px] gap-[30px] my-[40px] relative"
           >
             <div className="max-w-[400px] max-h-[250px] ">
               <img
@@ -68,7 +70,7 @@ const Homepage = () => {
               <a
                 href={item.url}
                 target="_blank"
-                className="w-[100px] underline text-blue-500 font-bold"
+                className="w-[100px] underline text-blue-400 font-bold"
               >
                 อ่านต่อ
               </a>
@@ -76,7 +78,7 @@ const Homepage = () => {
                 หมวด:
                 {item.tags.slice(0, -1).map((tag) => (
                   <span
-                    className={`mx-[5px] underline
+                    className={`mx-[5px] underline cursor-pointer
                     } `}
                     onClick={() => handleTag(tag)}
                     key={tag}
@@ -87,7 +89,7 @@ const Homepage = () => {
                 และ
                 {item.tags.slice(-1).map((tag) => (
                   <span
-                    className="mx-[5px] underline"
+                    className="mx-[5px] underline cursor-pointer"
                     onClick={() => handleTag(tag)}
                     key={tag}
                   >
